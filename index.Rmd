@@ -1,0 +1,73 @@
+---
+title       : Independence of Two Binary Variables
+subtitle    : Determining with a Shiny app
+author      : Jon Juneau
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [] # {mathjax, quiz, bootstrap}
+ext_widgets : {rCharts: [libraries/nvd3]}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Do You Need This?
+
+### Do You want to know if two variables are related?
+
+### Are both variables binary? (can only take on 1 of 2 possible values)
+
+##### Some examples of binary variables:
+
+1. TRUE or FALSE
+2. YES or NO
+3. Male or Female
+
+---
+
+## Possibilities for Two Binary Variables:
+
+### There are only Four possible categories with 2 binary variables:
+
+1. A is TRUE and B is TRUE
+2. A is TRUE and B is FALSE
+3. A is FALSE and B is TRUE
+4. A is FALSE and B is FALSE
+
+### The only input data required for this app is the count of incidences for each of these four categories
+
+---
+
+## What is Independence?
+
+### Asssume that the following is true:
+
+* Probability of A being true is 0.5000, thus the probability of A being false is 0.5000.
+* Probability of B being true is 0.2500, thus the probability of B being false is 0.7500.
+
+### If A and B are Independent, then:
+
+* The probability of both A and B being true is the probability that A is true times the probability that B is true: (0.5000)*(0.2500) = 0.1250
+* The probability that A is true and B is false is the probability that A is true times the probability that B is false: (0.5000)*(0.75000) = 0.3750
+* etc.
+
+### Otherwise, A and B are not independent!!
+
+
+---
+
+## Use the Shiny App!
+
+* The Shiny App uses the R chi-squared test to determine if the variables are independent.  For example:
+
+```{r}
+dF <- data.frame(B.True = c(.5*.25,.5*.25),B.FALSE=c(.5*.75,.5*.75),
+                 row.names=c('A.TRUE','A.FALSE'))
+dF <- 1000 * dF
+chisq.test(dF)
+```
+
+* The p-value is the probability that A and B are independent. In this case the p-value is 1., indicating certainty.
+
+* The app is available at:  https://jonjuneau.shinyapps.io/Independence/
